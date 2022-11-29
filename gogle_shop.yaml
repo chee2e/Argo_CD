@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: store-was-deployment
+  labels:
+    tier: was
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      tier: was
+  template:
+    metadata:
+      labels:
+        tier: was
+    spec:
+      containers:
+      - name: store-container
+        image: chee2e/gogleshop:v2
+        ports:
+        - containerPort: 8080
+        resources:
+          requests: 
+            memory: "100Mi"
+            cpu: "250m"
+          limits:   
+            cpu: "500m"
